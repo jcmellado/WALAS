@@ -14,14 +14,26 @@ function getTextNode(text) {
         return null;
     }
     return text
-        .filter((item) => item && typeof item !== 'function')
+        .filter((item) => item && typeof item !== 'function' && !Array.isArray(item))
         .join("");
 }
 function createChilds(childs) {
+    var result;
     if (childs && Array.isArray(childs)) {
-        childs
-            .filter(child => typeof child === 'function')
-            .forEach(child => child());
+        result = childs
+            .filter(child => typeof child === 'function' || Array.isArray(child))[0];
+            
+        if(Array.isArray(result)){
+            result.forEach(c=>c());
+        }else
+        {
+            if(typeof result==="function"){
+                result();
+            }
+        }
+        
+            
+            
     }
 }
 function normalizeAttrs(attrs) {
