@@ -12,65 +12,7 @@
     <x-app></x-app>
     -->
     <script src="../dist/walas.js"></script>
-    <script>
-        class App extends Walas.ComponentBase{
-            static componentName(){
-                return "x-app";                
-            }
-            static inject(){
-                return ["$http"];
-            }
-            constructor(){
-                super();
-                this._text = 1;
-                var self= this;
-                this.constructor.inject().forEach((item)=>{
-                    self[item] = new class{};
-                });
-            } 
-            click(){
-               this.text++;
-            }           
-            set text(value){
-                this._text = value;
-                this.refresh();
-            }
-            get text(){
-                return this._text
-            }
-            render(){
-               /*<div onClick={this.click} a="10">
-                    {this.text} Hola pepe
-                    <a $key="uno"></a>
-                </div>*/
-
-               return Walas.Dom.create(
-                    "div",
-                    { onClick: this.click.bind(this), a: "10" },
-                    this.text,
-                    " Hello Walas",
-                    Walas.Dom.create("a",null)
-                );
-                 /* return Walas.Dom.create(
-                            "div",
-                            { onClick: this.click.bind(this), a: "10" },
-                            this.text,
-                            " Hola pepe",
-                            [1, 2, 3].map(c => {
-                                    return Walas.Dom.create(
-                                        "span",
-                                        null,
-                                        c
-                                    );
-                            })
-                        );*/
-            }
-            
-        }
-        var app = Walas.Components.register(App);
-        Walas.bootstrap(document.getElementById('app'),app);
-       
-    </script>
+    <script src ="app.js"></script>
 </body>
 
 </html>

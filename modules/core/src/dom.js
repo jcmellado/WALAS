@@ -1,14 +1,6 @@
 import { patch, elementOpen, elementClose, text, elementVoid } from 'incremental-dom';
 
-function createEvents() {
-    var eventName = /on[A-Z]/;
-    var element = elementOpen.apply(null, [...arguments]);
-    Object.keys(element)
-        .filter((event) => eventName.test(event))
-        .forEach((event) => {
-            element.addEventListener(event.replace('on', '').toLowerCase(), element[event]);
-        });
-}
+
 function getTextNode(text) {
     if (!Array.isArray(text)) {
         return null;
@@ -30,10 +22,7 @@ function createChilds(childs) {
             if(typeof result==="function"){
                 result();
             }
-        }
-        
-            
-            
+        }      
     }
 }
 function normalizeAttrs(attrs) {
@@ -67,7 +56,7 @@ function create() {
 }
 export const DOM = {
     patch: patch,
-    open: createEvents,
+    open: elementOpen,
     close: elementClose,
     void: elementVoid,
     text: text,
