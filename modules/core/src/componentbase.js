@@ -1,6 +1,5 @@
 import { DOM } from './dom';
 import { ElementBase } from './util';
-
 export class ComponentBase extends ElementBase() {
     constructor() {
         super();

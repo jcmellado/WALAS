@@ -27,6 +27,7 @@
     "rollup-plugin-uglify": "^1.0.1"
   },
   "dependencies": {
+    "core-decorators": "^0.15.0",
     "incremental-dom": "^0.5.1"
   }
 }
