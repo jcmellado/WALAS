@@ -40,9 +40,9 @@ class App extends Walas.ComponentBase {
     render() {
         /*<div onClick={this.click} a="10">
             {this.text} Hola pepe
-            {[1,2,3].map(c=><span>c</span>)}
+            {[1,2,3].map(c=><span>{c}</span>)}
         </div>*/
-        
+
         return Walas.Dom.create(
             "div",
             { onClick: this.click, a: "10" },
