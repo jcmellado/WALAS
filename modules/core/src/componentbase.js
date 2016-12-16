@@ -54,7 +54,7 @@ export class ComponentBase extends ElementBase() {
 
     }
     destroy() {
-
+        this._unsuscribeEvents();
     }
     changeAttribute() {
 
