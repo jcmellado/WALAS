@@ -38,18 +38,11 @@ class App extends Walas.ComponentBase {
                 </style>`
     }
     render() {
-        /*<div onClick={this.click.bind(this)} a="10">
-             {this.text} Hola pepe
-             <a $key="uno"></a>
-         </div>*/
-
-        /*return Walas.Dom.create(
-             "div",
-             { onClick: this.click.bind(this), a: "10" },
-             this.text,
-             " Hello Walas",
-             Walas.Dom.create("a",null)
-         );*/
+        /*<div onClick={this.click} a="10">
+            {this.text} Hola pepe
+            {[1,2,3].map(c=><span>c</span>)}
+        </div>*/
+        
         return Walas.Dom.create(
             "div",
             { onClick: this.click, a: "10" },
