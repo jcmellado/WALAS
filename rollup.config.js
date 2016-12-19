@@ -1,9 +1,9 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
-//import uglify from 'rollup-plugin-uglify';
-//import eslint from 'rollup-plugin-eslint';
-//import babel from 'rollup-plugin-babel';
+import uglify from 'rollup-plugin-uglify';
+import eslint from 'rollup-plugin-eslint';
+import babel from 'rollup-plugin-babel';
 
 export default {
   entry: 'index.js',  
@@ -20,11 +20,11 @@ export default {
     replace({
       'process.env.NODE_ENV': JSON.stringify("production")
     }),
-    //eslint(),
-    /*babel({
+    eslint(),
+    babel({
       exclude: 'node_modules/**',     
-    }),*/
-    //uglify()
+    }),
+    uglify()
   ],
   sourceMap: true,
   sourceMapFile:'dist/walas.js.map'
