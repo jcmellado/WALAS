@@ -4,9 +4,9 @@
   "description": "framework frontend for webcomponents",
   "main": "index.js",
   "scripts": {
-    "budle": "rollup -c",
+    "bundle": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run budle"
+    "build": "npm run bundle"
   },
   "keywords": [
     "webcomponents"
