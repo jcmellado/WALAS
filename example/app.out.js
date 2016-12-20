@@ -12,15 +12,12 @@ class App extends Walas.ComponentBase {
                 required: true,
                 reflectAttribute: true
             }
-        }
+        };
     }
     constructor() {
         super();
         this._text = 1;
-        this.constructor.inject()
-
-
-
+        this.constructor.inject();
     }
     click() {
         this.text++;
@@ -30,18 +27,25 @@ class App extends Walas.ComponentBase {
         this.refresh();
     }
     get text() {
-        return this._text
+        return this._text;
     }
     style() {
         `<style>
                     
-                </style>`
+                </style>`;
     }
     render() {
-        return (<div onClick={this.click} a="10">
-            {this.text} Hola pepe
-            {[1,2,3].map(c=><span>{c}</span>)}
-        </div>);
+        return Walas.Dom.create(
+            "div",
+            { onClick: this.click, a: "10" },
+            this.text,
+            " Hola pepe",
+            [1, 2, 3].map(c => Walas.Dom.create(
+                "span",
+                null,
+                c
+            ))
+        );
         /*
         return Walas.Dom.create(
             "div",
@@ -62,3 +66,5 @@ class App extends Walas.ComponentBase {
 }
 var app = Walas.Components.register(App);
 Walas.bootstrap(document.getElementById('app'), app);
+
+//# sourceMappingURL=app.out.js.map

@@ -6,7 +6,8 @@
   "scripts": {
     "budle": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run budle"
+    "build": "npm run budle",
+    "jsx": "babel example/app.js --out-file example/app.out.js --source-maps --extends example/.babelrc"
   },
   "keywords": [
     "webcomponents"
@@ -15,6 +16,8 @@
   "license": "ISC",
   "devDependencies": {
     "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
     "babel-preset-es2015-rollup": "^3.0.0",
     "eslint": "^3.12.1",
     "eslint-config-google": "^0.7.1",
