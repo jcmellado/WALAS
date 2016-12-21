@@ -42,21 +42,7 @@ class App extends Walas.ComponentBase {
             {this.text} Hola pepe
             {[1,2,3].map(c=><span>{c}</span>)}
         </div>);
-        /*
-        return Walas.Dom.create(
-            "div",
-            { onClick: this.click, a: "10" },
-            this.text,
-            " Hola pepe",
-            [1, 2, 3].map(c => {
-                return Walas.Dom.create(
-                    "span",
-                    null,
-                    c
-                );
-            })
-        );
-        */
+       
     }
 
 }
