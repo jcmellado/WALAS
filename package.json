@@ -4,15 +4,15 @@
   "description": "framework frontend for webcomponents",
   "main": "index.js",
   "scripts": {
-    "budle": "rollup -c",
+    "bundle": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run budle"
+    "build": "npm run bundle"
   },
   "keywords": [
     "webcomponents"
   ],
   "author": "Alfatec",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-preset-es2015-rollup": "^3.0.0",
