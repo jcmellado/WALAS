@@ -1,5 +1,5 @@
 # Walas
-Minimalist framework based on [Web Components v1](https://developers.google.com/web/fundamentals/getting-started/primers/customelements) that weighs less than 6 Kb.
+Minimalist framework based on [Web Components v1](https://developers.google.com/web/fundamentals/getting-started/primers/customelements) 
 
 Uses [Google Incremental DOM](https://github.com/google/incremental-dom) as render engine, and supports [Facebook JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) as syntax template.
 
