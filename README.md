@@ -93,12 +93,7 @@ class App extends Walas.ComponentBase {
   }
   
   render() {
-    return Walas.Dom.create(
-      'div',
-      { onClick: this.click },
-      'Clicked: ',
-      this.text
-    );
+    return <div onClick={this.click}>{this.text}</div>
   }
 }
 
