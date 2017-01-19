@@ -1,5 +1,5 @@
 # Walas
-Minimalist framework based on [Web Components v1](https://developers.google.com/web/fundamentals/getting-started/primers/customelements) 
+Minimalist framework based on [Web Components v1](https://developers.google.com/web/fundamentals/getting-started/primers/customelements).
 
 Uses [Google Incremental DOM](https://github.com/google/incremental-dom) as render engine, and supports [Facebook JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) as syntax template.
 
@@ -27,12 +27,12 @@ _Method_
 
 Called every time the component is inserted into the DOM. It calls to the `refresh` method.
 
-### destroy
+### destroyed
 _Method_
 
 Called every time the component is removed from the DOM. It removes the event listeners.
 
-### changeAttribute(name, oldValue, newValue)
+### attributeChanged(name, oldValue, newValue)
 _Method_
 
 Called every time an attribute is added, removed, updated, or replaced.
@@ -93,7 +93,7 @@ class App extends Walas.ComponentBase {
   }
   
   render() {
-    return <div onClick={this.click}>{this.text}</div>
+    return <div onClick={this.click}>Clicks: {this.text}</div>
   }
 }
 

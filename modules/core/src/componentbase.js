@@ -13,10 +13,10 @@ export class ComponentBase extends ElementBase() {
         this.created();
     }
     disconnectedCallback() {
-        this.destroy();
+        this.destroyed();
     }
     attributeChangedCallback(attr, oldValue, newValue) {
-        this.changeAttribute(attr, oldValue, newValue);
+        this.attributeChanged(attr, oldValue, newValue);
     }
     render() {
 
@@ -53,10 +53,10 @@ export class ComponentBase extends ElementBase() {
         this.refresh();
 
     }
-    destroy() {
+    destroyed() {
         this._unsuscribeEvents();
     }
-    changeAttribute() {
+    attributeChanged() {
 
     }
 }

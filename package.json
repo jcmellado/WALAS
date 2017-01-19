@@ -6,7 +6,7 @@
   "scripts": {
     "bundle": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run budle",
+    "build": "npm run bundle",
     "jsx": "babel example/app.js --out-file example/app.out.js --source-maps --extends example/.babelrc"
   },
   "keywords": [
