@@ -6,7 +6,7 @@ function getTextNode(text) {
         return null;
     }
     return text
-        .filter((item) => item && typeof item !== 'function' && !Array.isArray(item))
+        .filter((item) => item !== undefined && item !== null && typeof item !== 'function' && !Array.isArray(item))
         .join("");
 }
 function createChilds(childs) {
@@ -31,8 +31,8 @@ function normalizeAttrs(attrs) {
         return null;
     }
     Object.keys(attrs).forEach((attr) => {
-        _attrs.push(attr),
-            _attrs.push(attrs[attr]);
+        _attrs.push(attr);
+        _attrs.push(attrs[attr]);
     });
     return _attrs;
 }
