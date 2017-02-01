@@ -13,7 +13,7 @@ function createChilds(childs) {
     var result;
     if (childs && Array.isArray(childs)) {
         result = childs
-            .filter(child => typeof child === 'function' || Array.isArray(child))[0];
+            .filter(child => typeof child === 'function' || Array.isArray(child));
             
         if(Array.isArray(result)){
             result.forEach(c=>c());
