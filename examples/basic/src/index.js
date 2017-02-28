@@ -1,4 +1,6 @@
-class App extends Walas.ComponentBase {
+import * as walas from 'walas';
+
+class App extends walas.ComponentBase {
 
   static componentName() {
     return 'x-app';
@@ -10,7 +12,7 @@ class App extends Walas.ComponentBase {
   }
 
   click() {
-    this.text ++;
+    this.text++;
   }
 
   set text(value) {
@@ -23,9 +25,10 @@ class App extends Walas.ComponentBase {
   }
 
   render() {
-    return <div onClick={this.click}>Clicks: {this.text}</div>
+    return <div onClick={this.click}>Clicks: {this.text}</div>;
   }
 }
 
-var app = Walas.Components.register(App);
-Walas.bootstrap(document.getElementById('app'), app);
+let app = walas.Components.register(App);
+
+walas.bootstrap(document.getElementById('app'), app);

@@ -1,0 +1,21 @@
+{
+  "name": "walas-examples-basic",
+  "private": true,
+  "description": "Basic example.",
+  "scripts": {
+    "build": "browserify -d ./src/index.js -t babelify  -o ./dist/build.js",
+    "watch": "watchify -v -d ./src/index.js -t babelify -o ./dist/build.js",
+    "serve": "lite-server"
+  },
+  "main": "dist/build.js",
+  "devDependencies": {
+    "babel-plugin-transform-react-jsx": "^6.23.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.0.0",
+    "lite-server": "^2.2.2",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "walas": "^0.1.0"
+  }
+}

@@ -1,31 +1,29 @@
-import resolve from 'rollup-plugin-node-resolve';
+import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
+import resolve from 'rollup-plugin-node-resolve';
 import uglify from 'rollup-plugin-uglify';
-import eslint from 'rollup-plugin-eslint';
-import babel from 'rollup-plugin-babel';
 
 export default {
-  entry: 'index.js',  
-  dest: 'dist/walas.js',
+  moduleName: 'walas',
   format: 'umd',
-  moduleName:'Walas',
+  entry: 'src/index.js',
+  dest: 'dist/walas.js',
+  sourceMap: true,
+  sourceMapFile: 'dist/walas.js.map',
   plugins: [
     resolve({
       jsnext: true,
       main: true,
       browser: true,
-    }),  
-    commonjs(),    
+    }),
+    commonjs(),
     replace({
-      'process.env.NODE_ENV': JSON.stringify("production")
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    eslint(),
     babel({
-      exclude: 'node_modules/**',     
+      exclude: 'node_modules/**',
     }),
-    uglify()
+    uglify(),
   ],
-  sourceMap: true,
-  sourceMapFile:'dist/walas.js.map'
 };
