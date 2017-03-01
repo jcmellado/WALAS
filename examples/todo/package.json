@@ -1,0 +1,21 @@
+{
+  "name": "walas-examples-todo",
+  "private": true,
+  "description": "TODO example.",
+  "scripts": {
+    "build": "browserify -d ./src/index.js -t babelify  -o ./dist/build.js",
+    "watch": "watchify -v -d ./src/index.js -t babelify -o ./dist/build.js",
+    "serve": "lite-server"
+  },
+  "main": "dist/build.js",
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-react-jsx": "^6.23.0",
+    "babelify": "^7.3.0",
+    "validate.js": "^0.11.1"
+  },
+  "dependencies": {
+    "walas": "^0.1.0"
+  }
+}
