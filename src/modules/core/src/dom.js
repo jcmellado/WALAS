@@ -12,19 +12,21 @@ function getTextNode(text) {
 }
 
 function createChilds(childs) {
-  let result;
-  if (childs && Array.isArray(childs)) {
-    result = childs
-      .filter(child => typeof child === 'function' || Array.isArray(child));
+  let result = childs;
+  //  if (childs && Array.isArray(childs)) {
+  //    result = childs
+  //      .filter(child => typeof child === 'function' || Array.isArray(child));
 
-    if (Array.isArray(result)) {
-      result.forEach(c => c());
+  if (Array.isArray(result)) {
+    result.forEach(c => createChilds(c));
+  } else {
+    if (typeof result === 'function') {
+      result();
     } else {
-      if (typeof result === 'function') {
-        result();
-      }
+      DOM.text(result);
     }
   }
+  //  }
 }
 
 function normalizeAttrs(attrs) {
@@ -42,14 +44,14 @@ function create() {
   let args = [...arguments],
     name = args[0],
     attrs = normalizeAttrs(args[1]),
-    nextArgs = args.slice(2),
-    text = getTextNode(nextArgs);
+    nextArgs = args.slice(2);//,
+  //text = getTextNode(nextArgs);
 
   return function() {
     DOM.open(name, null, attrs);
-    if (text) {
-      DOM.text(text);
-    }
+    //if (text) {
+    //DOM.text(text);
+    //}
     createChilds(nextArgs);
     DOM.close(name);
   };

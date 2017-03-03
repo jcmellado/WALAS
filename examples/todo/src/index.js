@@ -1,34 +1,32 @@
 import * as walas from 'walas';
+import { App } from './components/app.js';
+import { TaskBar } from './components/taskbar.js';
+import { TaskList } from './components/tasklist.js';
+import { TaskItem } from './components/taskitem.js';
 
-class App extends walas.ComponentBase {
+// Application
 
-  static componentName() {
-    return 'x-app';
-  }
+walas.Components.register(TaskBar);
+walas.Components.register(TaskList);
+walas.Components.register(TaskItem);
+walas.Components.register(App);
 
-  constructor() {
-    super();
-    this._text = 0;
-  }
-
-  click() {
-    this.text++;
-  }
-
-  set text(value) {
-    this._text = value;
-    this.refresh();
-  }
-
-  get text() {
-    return this._text;
-  }
-
-  render() {
-    return <div onClick={this.click}>Clicks: {this.text}</div>;
-  }
-}
-
-let app = walas.Components.register(App);
+let app = walas.Components.getComponent('todo-app');
 
 walas.bootstrap(document.getElementById('app'), app);
+
+// Model
+
+class Task {
+
+  id;
+
+  @walas.notBlank
+  @walas.length(10)
+  @walas.required
+  name;
+
+  @walas.required
+  done;
+}
+
