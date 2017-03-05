@@ -1,6 +1,6 @@
 import * as walas from 'walas';
 
-class App extends walas.ComponentBase {
+class App extends walas.Component {
 
   static componentName() {
     return 'x-app';
@@ -17,7 +17,7 @@ class App extends walas.ComponentBase {
 
   set text(value) {
     this._text = value;
-    this.refresh();
+    this.update();
   }
 
   get text() {

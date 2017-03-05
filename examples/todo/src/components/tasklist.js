@@ -1,39 +1,26 @@
 import * as walas from 'walas';
-import { emitter } from '../services/emitter.js';
+import { TaskItem } from './taskitem.js';
 
-export class TaskList extends walas.ComponentBase {
+export class TaskList extends walas.Component {
 
-  _tasks = ['Wash the car', 'Meet Susan', 'Buy eggs'];
-
-  static componentName() {
+  static name() {
     return 'todo-tasklist';
   }
 
   constructor() {
     super();
-
-    emitter.on('task.add', this.addTask.bind(this));
-    emitter.on('task.remove', this.removeTask.bind(this));
-  }
-
-  addTask(task) {
-    this._tasks.push(task);
-    this.refresh();
-  }
-
-  removeTask(task) {
-    let index = this._tasks.indexOf(task);
-    if (index >= 0) {
-      this._tasks.splice(index, 1);
-    }
-    this.refresh();
   }
 
   render() {
-    return <div>
-      <ul>
-        {this._tasks.map((task) => <li><todo-taskitem name={task} /></li>)}
-      </ul>
-    </div>;
+    return (
+      <div>
+        <ul>
+          {this.props.children.map(
+            task => <li><todo-taskitem>{task}</todo-taskitem></li>)}
+        </ul>
+      </div>
+    );
   }
 }
+
+walas.Components.register(TaskList);

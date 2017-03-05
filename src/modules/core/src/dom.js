@@ -1,59 +1,82 @@
 import { patch, elementOpen, elementClose, text, elementVoid }
   from 'incremental-dom';
 
-function getTextNode(text) {
-  if (!Array.isArray(text)) {
-    return null;
-  }
-  return text
-    .filter((item) => item !== undefined && item !== null
-      && typeof item !== 'function' && !Array.isArray(item))
-    .join('');
-}
-
 function createChilds(childs) {
   let result = childs;
-  //  if (childs && Array.isArray(childs)) {
-  //    result = childs
-  //      .filter(child => typeof child === 'function' || Array.isArray(child));
 
   if (Array.isArray(result)) {
-    result.forEach(c => createChilds(c));
-  } else {
-    if (typeof result === 'function') {
-      result();
-    } else {
-      DOM.text(result);
-    }
+    return result.map(c => createChilds(c));
   }
-  //  }
+  if (typeof result === 'function') {
+    return result();
+  }
+  if (typeof result === 'string') {
+    return DOM.text(result);
+  }
 }
 
-function normalizeAttrs(attrs) {
-  let _attrs = [];
-  if (!attrs || typeof attrs !== 'object') {
+function flattenAttributes(props) {
+  if (!props || typeof props !== 'object') {
     return null;
   }
-  Object.keys(attrs).forEach((attr) => {
-    _attrs.push(attr);
-    _attrs.push(attrs[attr]);
+  let attrs = [];
+  Object.keys(props).forEach(key => {
+    attrs.push(key);
+    attrs.push(props[key]);
   });
-  return _attrs;
+  return attrs;
 }
-function create() {
-  let args = [...arguments],
-    name = args[0],
-    attrs = normalizeAttrs(args[1]),
-    nextArgs = args.slice(2);//,
-  //text = getTextNode(nextArgs);
 
+function create(type, props, ...children) {
   return function() {
-    DOM.open(name, null, attrs);
-    //if (text) {
-    //DOM.text(text);
-    //}
-    createChilds(nextArgs);
-    DOM.close(name);
+    let key;
+    let statics;
+    let attrs = flattenAttributes(props);
+    let isComponent = customElements.get(type) !== undefined;
+
+    if (props && props.key) {
+      key = props.key;
+    }
+
+    if (isComponent) {
+      if (children) {
+        let xxx = props || {};
+        xxx['children'] = children;
+
+        attrs = attrs || [];
+        attrs.push('props');
+        attrs.push(xxx);
+      }
+    }
+
+    // https://github.com/skatejs/skatejs/blob/master/src/api/vdom.js
+    // https://github.com/Lucifier129/react-lite/blob/master/src/virtual-dom.js
+    // https://github.com/developit/preact/blob/master/src/h.js
+    // https://github.com/metal/metal.js/blob/master/packages/metal-component/src/Component.js
+    // https://github.com/jridgewell/babel-plugin-transform-incremental-dom
+    // https://github.com/ferrugemjs/library
+    // https://github.com/google/incremental-dom/blob/master/demo/customelement.html
+    // https://github.com/google/incremental-dom/blob/master/demo/define_component.js
+    // https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html
+    // https://facebook.github.io/react/docs/lifting-state-up.html
+    // https://github.com/google/incremental-dom/blob/master/src/core.js
+    // https://www.polymer-project.org/1.0/docs/devguide/properties
+
+    let element = attrs
+      ? DOM.open(type, key, statics, ...attrs)
+      : DOM.open(type, key, statics);
+
+    if (isComponent) {
+      console.log(`${type} ${children}`);
+
+      element.update();
+    } else {
+      if (children) children.map(child => createChilds(child));
+    }
+
+    DOM.close(type);
+
+    return element;
   };
 }
 

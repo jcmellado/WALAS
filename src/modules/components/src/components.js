@@ -9,7 +9,7 @@ class Component {
   }
 
   register(component) {
-    let name = component.componentName();
+    let name = component.name();
     if (!this._customElements[name]) {
       this._customElements[name] = component;
       customElements.define(name, component);
