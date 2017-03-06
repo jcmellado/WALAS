@@ -14,7 +14,7 @@
     "babel-plugin-transform-react-jsx": "^6.23.0",
     "babelify": "^7.3.0",
     "eventemitter2": "^3.0.1",
-    "validate.js": "^0.11.1"
+    "validator.js": "^2.0.3"
   },
   "dependencies": {
     "walas": "^0.1.0"

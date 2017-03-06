@@ -1,2 +1,2 @@
 export * from './src/decorators';
-export * from './src/validator';
+export {validate_old} from './src/validator';

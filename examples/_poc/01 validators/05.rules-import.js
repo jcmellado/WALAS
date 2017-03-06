@@ -5,7 +5,7 @@ export class Task {
 
   id;
 
-  @rules(notBlank, [length, 50], required)
+  @rules(required, [length, {min: 50}], notBlank)
   name;
 
   @rules(required)

@@ -5,7 +5,7 @@ export class Task {
 
   id;
 
-  @walas.rules(Rules.notBlank, [Rules.length, 50], Rules.required)
+  @walas.rules(Rules.required, Rules.notBlank, [Rules.length, 50])
   name;
 
   @walas.rules(Rules.required)
