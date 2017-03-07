@@ -16,14 +16,14 @@ class Validator {
     });
   }
 
-  validate(target) {
+  validate(target) { // TODO process(target, metasymbol) ** needs a better name
     return this._rules
       .map(entry => entry.rule(entry.key, target[entry.key], ...entry.params))
       .filter(error => error);
   }
 }
 
-function getValidator(target) {
+function getValidator(target) { // TODO metadata(metasymbol, value) ** get/set
   return target.constructor[symbols.validator] ||
     (target.constructor[symbols.validator] = new Validator());
 }

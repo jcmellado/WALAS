@@ -1,19 +1,6 @@
 import { patch, elementOpen, elementClose, text, elementVoid }
   from 'incremental-dom';
 
-function createChilds(childs) {
-  let result = childs;
-
-  if (Array.isArray(result)) {
-    return result.map(c => createChilds(c));
-  }
-  if (typeof result === 'function') {
-    return result();
-  }
-  if (typeof result === 'string') {
-    return DOM.text(result);
-  }
-}
 
 function flattenAttributes(props) {
   if (!props || typeof props !== 'object') {
@@ -25,6 +12,21 @@ function flattenAttributes(props) {
     attrs.push(props[key]);
   });
   return attrs;
+}
+
+function createChild(child) {
+  if (typeof child === 'string') {
+    return DOM.text(child);
+  }
+  if (typeof child === 'number') {
+    return DOM.text(String(child));
+  }
+  if (typeof child === 'function') {
+    return child();
+  }
+  if (Array.isArray(child)) {
+    return child.map(item => createChild(item));
+  }
 }
 
 function create(type, props, ...children) {
@@ -40,7 +42,7 @@ function create(type, props, ...children) {
 
     if (isComponent) {
       if (children) {
-        let xxx = props || {};
+        let xxx = props || {}; // TODO convert to String or another type
         xxx['children'] = children;
 
         attrs = attrs || [];
@@ -49,29 +51,14 @@ function create(type, props, ...children) {
       }
     }
 
-    // https://github.com/skatejs/skatejs/blob/master/src/api/vdom.js
-    // https://github.com/Lucifier129/react-lite/blob/master/src/virtual-dom.js
-    // https://github.com/developit/preact/blob/master/src/h.js
-    // https://github.com/metal/metal.js/blob/master/packages/metal-component/src/Component.js
-    // https://github.com/jridgewell/babel-plugin-transform-incremental-dom
-    // https://github.com/ferrugemjs/library
-    // https://github.com/google/incremental-dom/blob/master/demo/customelement.html
-    // https://github.com/google/incremental-dom/blob/master/demo/define_component.js
-    // https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html
-    // https://facebook.github.io/react/docs/lifting-state-up.html
-    // https://github.com/google/incremental-dom/blob/master/src/core.js
-    // https://www.polymer-project.org/1.0/docs/devguide/properties
-
     let element = attrs
       ? DOM.open(type, key, statics, ...attrs)
       : DOM.open(type, key, statics);
 
     if (isComponent) {
-      console.log(`${type} ${children}`);
-
-      element.update();
+      element.update(); // TODO observe "props" to avoid this call ??? set initial properties ???
     } else {
-      if (children) children.map(child => createChilds(child));
+      if (children) children.forEach(child => createChild(child));
     }
 
     DOM.close(type);

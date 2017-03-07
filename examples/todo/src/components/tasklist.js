@@ -15,7 +15,7 @@ export class TaskList extends walas.Component {
     return (
       <div>
         <ul>
-          {this.props.children.map(
+          {this.props.children[0].map(
             task => <li><todo-taskitem>{task}</todo-taskitem></li>)}
         </ul>
       </div>
